@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('nrcs', function (Blueprint $table) {
-             $table->uuid('id')->primary();
+            $table->id();
             $table->string('name_en');
             $table->string('name_mm');
             $table->integer('nrc_code');

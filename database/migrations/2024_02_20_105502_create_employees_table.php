@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
              $table->uuid('id')->primary();
-            $table->string('name_en');
+            $table->string('name_enn');
             $table->string('name_mm');
             $table->string('father_name');
             $table->date('date_of_birth');
@@ -23,13 +23,14 @@ return new class extends Migration
             $table->string('vacancy');
             $table->string('passport_no');
             $table->string('driver_license');
-            $table->string('genders');
+            $table->string('gender');
             $table->string('blood');
             $table->string('marital_status');
             $table->string('hph_no')->unique();
             $table->string('ph_no')->unique();
             $table->string('url');
-            $table->foreignUuid('nrcs_id')->constrained('nrcs');
+            $table->foreignId('nrcs_id')->constrained('nrcs');
+            $table->string('nrcs_n');
             $table->string('type');
             $table->integer('nrc_num')->unique();
             $table->timestamps();

@@ -9,4 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class Nrc extends Model
 {
     use HasFactory, HasUuids;
+    protected $guarded = [];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('nrc_nos', function (Blueprint $table) {
              $table->uuid('id')->primary();
-            $table->foreignUuid('nrc_code')->constrained('nrcs')->cascadeOnDelete();
-            $table->foreignUuid('name_en')->constrained('nrcs')->cascadeOnDelete();
+            $table->foreignId('nrc_code')->constrained('nrcs')->cascadeOnDelete();
+            $table->foreignId('name_en')->constrained('nrcs')->cascadeOnDelete();
             $table->integer('nrc_num')->unique();
             $table->enum('type',['N','P','A'])->default('N');
             $table->timestamps();
