@@ -9,9 +9,5 @@ use Illuminate\Database\Eloquent\Model;
 class Fmember extends Model
 {
     use HasFactory, HasUuids;
-    protected $fillable = [
-        'name',
-        'relationship',
-        'date_of_birth',
-        'occupation'];
+    protected $guarded = [];
 }

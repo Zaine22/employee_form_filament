@@ -34,7 +34,7 @@ class Employee extends Model
     {
         return $this->hasMany(Rperson::class);
     }
-    public function fmember(): HasMany
+    public function fmembers(): HasMany
     {
         return $this->hasMany(Fmember::class);
     }

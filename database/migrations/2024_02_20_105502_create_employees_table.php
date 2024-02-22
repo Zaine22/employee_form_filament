@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
-             $table->uuid('id')->primary();
+            $table->uuid('id')->primary();
             $table->string('name_enn');
             $table->string('name_mm');
             $table->string('father_name');
@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('url');
             $table->foreignId('nrcs_id')->constrained('nrcs');
             $table->string('nrcs_n');
+            $table->string('nrc_no')->nullable();
             $table->string('type');
             $table->integer('nrc_num')->unique();
             $table->timestamps();

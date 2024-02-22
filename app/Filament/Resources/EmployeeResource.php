@@ -2,28 +2,28 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Nrc;
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Set;
-use App\Models\Employee;
-use Filament\Forms\Form;
 use App\Enums\GenderEnum;
-use Filament\Tables\Table;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Wizard;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\Wizard\Step;
 use App\Filament\Resources\EmployeeResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\EmployeeResource\RelationManagers;
+use App\Models\Employee;
+use App\Models\Nrc;
+use Filament\Actions\DeleteAction;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Wizard\Step;
+use Filament\Forms\Form;
+use Filament\Forms\Set;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class EmployeeResource extends Resource
 {
@@ -263,14 +263,14 @@ class EmployeeResource extends Resource
                                         ->placeholder('mtz@za.com.mm')
                                         ->live(onBlur: true),
 
-                                    TextInput::make('phone_no')
+                                    TextInput::make('ph_no')
                                         ->required()
                                         ->label('Phone')
                                         ->placeholder('09456785669')
                                         ->live(onBlur: true),
                                 ])->columns(4),
 
-                            Repeater::make('fmember')
+                            Repeater::make('fmembers')
                                 ->label('Reference Person')
                                 ->relationship()
                                 ->schema([
@@ -298,7 +298,7 @@ class EmployeeResource extends Resource
                                         ->placeholder('Occupation')
                                         ->live(onBlur: true),
 
-                                    TextInput::make('phone_no')
+                                    TextInput::make('ph_no')
                                         ->required()
                                         ->label('Contact Number')
                                         ->placeholder('Contact Number')
@@ -351,20 +351,54 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name_enn')
+                    ->label('Name'),
+                TextColumn::make('vacancy')
+                    ->label('Position'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ]);
-            // ->bulkActions([
-            //     Tables\Actions\BulkActionGroup::make([
-            //         Tables\Actions\DeleteBulkAction::make(),
-            //     ]),
-            // ]);
+        // ->bulkActions([
+        //     Tables\Actions\BulkActionGroup::make([
+        //         Tables\Actions\DeleteBulkAction::make(),
+        //     ]),
+        // ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                TextEntry::make('name_enn')
+                    ->label('Name'),
+                TextEntry::make('vacancy')
+                    ->label('Position'),
+                TextEntry::make('father_name')
+                    ->label('Father Name'),
+                TextEntry::make('date_of_birth')
+                    ->label('Date Of Birth'),
+                TextEntry::make('gender')
+                    ->label('Gender'),
+                TextEntry::make('nrc_no')
+                    ->label('NRCS'),
+                TextEntry::make('race')
+                    ->label('Race'),
+                TextEntry::make('religion')
+                    ->label('Religion'),
+                TextEntry::make('nationality')
+                    ->label('Nationality'),
+                TextEntry::make('passport_no')
+                    ->label('Passport No'),
+                TextEntry::make('marital_status')
+                    ->label('Marital Status'),
+                DeleteAction::make(),
+            ]);
+
     }
 
     public static function getRelations(): array
@@ -379,7 +413,7 @@ class EmployeeResource extends Resource
         return [
             'index' => Pages\ListEmployees::route('/'),
             'create' => Pages\CreateEmployee::route('/create'),
-            'view' => Pages\ViewEmployee::route('/{record}'),
+            // 'view' => Pages\ViewEmployee::route('/{record}'),
             'edit' => Pages\EditEmployee::route('/{record}/edit'),
         ];
     }

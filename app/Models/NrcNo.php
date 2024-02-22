@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NrcNo extends Model
 {
-    use HasFactory ,HasUuids;
+    use HasFactory, HasUuids;
     protected $guarded = [];
 
     public function employee()
